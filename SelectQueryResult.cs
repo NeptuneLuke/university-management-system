@@ -60,8 +60,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_student_fields(table_result);
-                    print_student_query(table_result);
+                    print_student(table_result);
 
                     Console.WriteLine();
                     break;
@@ -94,8 +93,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_student_fields(table_result);
-                    print_student_query(table_result);
+                    print_student(table_result);
 
                     Console.WriteLine();
                     break;
@@ -122,8 +120,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_student_fields(table_result);
-                    print_student_query(table_result);
+                    print_student(table_result);
 
                     Console.WriteLine();
                     break;
@@ -150,9 +147,8 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_student_fields(table_result);
-                    print_student_query(table_result);
-                    
+                    print_student(table_result);
+
                     Console.WriteLine();
                     break;
 
@@ -184,8 +180,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_student_fields(table_result);
-                    print_student_query(table_result);
+                    print_student(table_result);
 
                     Console.WriteLine();
                     break;
@@ -218,8 +213,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_student_fields(table_result);
-                    print_student_query(table_result);
+                    print_student(table_result);
 
                     Console.WriteLine();
                     break;
@@ -236,54 +230,23 @@ public class SelectQueryResult {
 
     }
 
-    public static void print_student_fields(DataTable table_result) {
+    public static void print_student(DataTable table_result) {
+
+        Table table = new Table();
+        table.Config = TableConfiguration.Unicode();
 
         for (int i = 0; i < table_result.Columns.Count; ++i) {
-            if (i == 1) {
-                Console.Write($"{table_result.Columns[i].ColumnName.PadRight(15, ' ')}");
-            }
-            else if (i == 2 || i == 4) {
-                Console.Write($"{table_result.Columns[i].ColumnName.PadRight(20, ' ')}");
-            }
-            else if (i == 3) {
-                Console.Write($"{table_result.Columns[i].ColumnName.PadRight(35, ' ')}");
-            }
-            else {
-                Console.Write($"{table_result.Columns[i].ColumnName.PadRight(10, ' ')}");
-            }
+            table.AddColumn(table_result.Columns[i].ColumnName);
         }
-        Console.Write("\n\n");
+
+        for (int i = 0; i < table_result.Rows.Count; ++i) {
+            table.AddRow(table_result.Rows[i][0].ToString(), table_result.Rows[i][1].ToString(), table_result.Rows[i][2].ToString(),
+                table_result.Rows[i][3].ToString(), table_result.Rows[i][4].ToString(), table_result.Rows[i][5].ToString().Substring(0,10));
+        }
+        Console.Write(table.ToString());
     }
 
-    public static void print_student_query(DataTable table_result) {
-
-        for (int i = 0; i < table_result.Rows.Count; i++) {
-            for (int j = 0; j < table_result.Columns.Count; ++j) {
-                var value = table_result.Rows[i][j];
-                if (j == 1) {
-                    Console.Write($"{value.ToString().PadRight(15, ' ')}");
-                    continue;
-                }
-                else if (j == 2 || j == 4) {
-                    Console.Write($"{value.ToString().PadRight(20, ' ')}");
-                    continue;
-                }
-                else if (j == 3) {
-                    Console.Write($"{value.ToString().PadRight(35, ' ')}");
-                    continue;
-                }
-                else if (j == 5) {
-                    string format_date = value.ToString().Substring(0, 10);
-                    Console.Write($"{format_date.PadRight(10, ' ')}");
-                    continue;
-                }
-                else {
-                    Console.Write($"{value.ToString().PadRight(10, ' ')}");
-                }
-            }
-            Console.WriteLine();
-        }
-    }
+    
 
 
     public static void menu_show_professor(string str_connection) {
@@ -336,8 +299,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_professor_fields(table_result);
-                    print_professor_query(table_result);
+                    print_professor(table_result);
 
                     Console.WriteLine();
                     break;
@@ -370,8 +332,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_professor_fields(table_result);
-                    print_professor_query(table_result);
+                    print_professor(table_result);
 
                     Console.WriteLine();
                     break;
@@ -397,8 +358,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_professor_fields(table_result);
-                    print_professor_query(table_result);
+                    print_professor(table_result);
 
                     Console.WriteLine();
                     break;
@@ -424,8 +384,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_professor_fields(table_result);
-                    print_professor_query(table_result);
+                    print_professor(table_result);
 
                     Console.WriteLine();
                     break;
@@ -463,8 +422,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_professor_fields(table_result);
-                    print_professor_query(table_result);
+                    print_professor(table_result);
 
                     Console.WriteLine();
                     break;
@@ -481,23 +439,19 @@ public class SelectQueryResult {
 
     }
 
-    static void print_professor_fields(DataTable table_result) {
+    static void print_professor(DataTable table_result) {
+
+        Table table = new Table();
+        table.Config = TableConfiguration.Unicode();
 
         for (int i = 0; i < table_result.Columns.Count; ++i) {
-            Console.Write($"{table_result.Columns[i].ColumnName.PadRight(15, ' ')}");
+            table.AddColumn(table_result.Columns[i].ColumnName);
         }
-        Console.Write("\n\n");
-    }
 
-    static void print_professor_query(DataTable table_result) {
-
-        for (int i = 0; i < table_result.Rows.Count; i++) {
-            for (int j = 0; j < table_result.Columns.Count; ++j) {
-                var value = table_result.Rows[i][j];
-                Console.Write($"{value.ToString().PadRight(15, ' ')}");
-            }
-            Console.WriteLine();
+        for (int i = 0; i < table_result.Rows.Count; ++i) {
+            table.AddRow(table_result.Rows[i][0].ToString(), table_result.Rows[i][1].ToString(), table_result.Rows[i][2].ToString());
         }
+        Console.Write(table.ToString());
     }
 
 
@@ -637,8 +591,6 @@ public class SelectQueryResult {
             table.AddRow(table_result.Rows[i][0].ToString(), table_result.Rows[i][1].ToString(), table_result.Rows[i][2].ToString());
         }
         Console.Write(table.ToString());
-
-        Console.Write("\n\n");
     }
 
 
