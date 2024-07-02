@@ -1,9 +1,6 @@
-﻿using System;
-using System.Data;
-using Google.Protobuf.WellKnownTypes;
-using MySql.Data.Types;
+﻿using System.Data;
+using BetterConsoleTables;
 using MySql.Data.MySqlClient;
-using System.Data.Common;
 
 namespace UniversityManagementSystem;
 
@@ -165,7 +162,7 @@ public class SelectQueryResult {
                         num_search = (Convert.ToInt32(Console.ReadLine()));
                     }
                     catch (Exception ex) {
-                        UniMain.log_message("Input not taken! ");
+                        UniMain.log_error_message("Input not taken! ");
                         UniMain.log_exception(ex);
                     }
 
@@ -199,7 +196,7 @@ public class SelectQueryResult {
                         num_search = (Convert.ToInt32(Console.ReadLine()));
                     }
                     catch (Exception ex) {
-                        UniMain.log_message("Input not taken! ");
+                        UniMain.log_error_message("Input not taken! ");
                         UniMain.log_exception(ex);
                     }
 
@@ -241,18 +238,18 @@ public class SelectQueryResult {
 
     public static void print_student_fields(DataTable table_result) {
 
-        for (int j = 0; j < table_result.Columns.Count; ++j) {
-            if (j == 1) {
-                Console.Write($"{table_result.Columns[j].ColumnName.PadRight(15, ' ')}");
+        for (int i = 0; i < table_result.Columns.Count; ++i) {
+            if (i == 1) {
+                Console.Write($"{table_result.Columns[i].ColumnName.PadRight(15, ' ')}");
             }
-            else if (j == 2 || j == 4) {
-                Console.Write($"{table_result.Columns[j].ColumnName.PadRight(20, ' ')}");
+            else if (i == 2 || i == 4) {
+                Console.Write($"{table_result.Columns[i].ColumnName.PadRight(20, ' ')}");
             }
-            else if (j == 3) {
-                Console.Write($"{table_result.Columns[j].ColumnName.PadRight(35, ' ')}");
+            else if (i == 3) {
+                Console.Write($"{table_result.Columns[i].ColumnName.PadRight(35, ' ')}");
             }
             else {
-                Console.Write($"{table_result.Columns[j].ColumnName.PadRight(10, ' ')}");
+                Console.Write($"{table_result.Columns[i].ColumnName.PadRight(10, ' ')}");
             }
         }
         Console.Write("\n\n");
@@ -320,7 +317,7 @@ public class SelectQueryResult {
                 choice = (Convert.ToInt32(Console.ReadLine()));
             }
             catch (Exception ex) {
-                UniMain.log_message("Input not taken! ");
+                UniMain.log_error_message("Input not taken! ");
                 UniMain.log_exception(ex);
             }
             Console.WriteLine();
@@ -486,8 +483,8 @@ public class SelectQueryResult {
 
     static void print_professor_fields(DataTable table_result) {
 
-        for (int j = 0; j < table_result.Columns.Count; ++j) {
-            Console.Write($"{table_result.Columns[j].ColumnName.PadRight(15, ' ')}");
+        for (int i = 0; i < table_result.Columns.Count; ++i) {
+            Console.Write($"{table_result.Columns[i].ColumnName.PadRight(15, ' ')}");
         }
         Console.Write("\n\n");
     }
@@ -552,8 +549,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_course_fields(table_result);
-                    print_course_query(table_result);
+                    print_course(table_result);
 
                     Console.WriteLine();
                     break;
@@ -579,8 +575,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_course_fields(table_result);
-                    print_course_query(table_result);
+                    print_course(table_result);
 
                     Console.WriteLine();
                     break;
@@ -612,8 +607,7 @@ public class SelectQueryResult {
                         break;
                     }
 
-                    print_course_fields(table_result);
-                    print_course_query(table_result);
+                    print_course(table_result);
 
                     Console.WriteLine();
                     break;
@@ -630,34 +624,21 @@ public class SelectQueryResult {
 
     }
 
-    static void print_course_fields(DataTable table_result) {
+    static void print_course(DataTable table_result) {
 
-        for (int j = 0; j < table_result.Columns.Count; ++j) {
-            if (j == 1 || j == 2) {
-                Console.Write($"{table_result.Columns[j].ColumnName.PadRight(25, ' ')}");
-            }
-            else {
-                Console.Write($"{table_result.Columns[j].ColumnName.PadRight(15, ' ')}");
-            }
+        Table table = new Table();
+        table.Config = TableConfiguration.Unicode();
+
+        for (int i = 0; i < table_result.Columns.Count; ++i) {
+            table.AddColumn(table_result.Columns[i].ColumnName);
         }
+
+        for (int i = 0; i < table_result.Rows.Count; ++i) {
+            table.AddRow(table_result.Rows[i][0].ToString(), table_result.Rows[i][1].ToString(), table_result.Rows[i][2].ToString());
+        }
+        Console.Write(table.ToString());
+
         Console.Write("\n\n");
-
-    }
-
-    static void print_course_query(DataTable table_result) {
-
-        for (int i = 0; i < table_result.Rows.Count; i++) {
-            for (int j = 0; j < table_result.Columns.Count; ++j) {
-                var value = table_result.Rows[i][j];
-                if (j == 1 || j == 2) {
-                    Console.Write($"{value.ToString().PadRight(25, ' ')}");
-                }
-                else {
-                    Console.Write($"{value.ToString().PadRight(15, ' ')}");
-                }
-            }
-            Console.WriteLine();
-        }
     }
 
 

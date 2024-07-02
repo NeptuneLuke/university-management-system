@@ -1,9 +1,6 @@
-﻿using System;
-using System.Data;
-using Google.Protobuf.WellKnownTypes;
-using MySql.Data.Types;
+﻿using System.Data;
 using MySql.Data.MySqlClient;
-using System.Data.Common;
+using MySql.Data.Types;
 
 namespace UniversityManagementSystem;
 

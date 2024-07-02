@@ -1,9 +1,4 @@
-﻿using System;
-using System.Data;
-using Google.Protobuf.WellKnownTypes;
-using MySql.Data.Types;
-using MySql.Data.MySqlClient;
-using System.Data.Common;
+﻿using MySql.Data.MySqlClient;
 
 namespace UniversityManagementSystem;
 
@@ -32,17 +27,19 @@ public class UniMain {
 
         log_message("Connecting to the server... \n");
 
-
         try {
-            using (MySqlConnection connection = new MySqlConnection(str_connection)) {
+            MySqlConnection try_connection = new MySqlConnection(str_connection);
+            try_connection.Open();
+            if (try_connection.State == System.Data.ConnectionState.Open) {
                 log_message("Connection succesful! \n");
-
-                main_menu(str_connection);
             }
+            try_connection.Close();
         }
         catch (MySqlException ex) {
             log_sql_exception(ex);
         }
+
+        main_menu(str_connection);
 
         log_message(new string [] { "Closing connection to the server... ",
                             "Connection closed!  ", 
