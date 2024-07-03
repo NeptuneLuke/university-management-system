@@ -36,13 +36,7 @@ public class SelectQueryResult {
             Console.ResetColor();
             Console.WriteLine();
 
-            try {
-                choice = (Convert.ToInt32(Console.ReadLine()));
-            }
-            catch (Exception ex) {
-                UniMain.log_error_message("Input not taken! ");
-                UniMain.log_exception(ex);
-            }
+            choice = UniMain.check_input_int();
             Console.WriteLine();
 
             switch (choice) {
@@ -67,8 +61,7 @@ public class SelectQueryResult {
 
                 case 2:
                     Console.WriteLine("Insert the course title: ");
-                    str_search = Console.ReadLine();
-                    str_search = str_search.Trim();
+                    str_search = UniMain.check_input_string(); 
                     if (string.IsNullOrWhiteSpace(str_search)) {
                         UniMain.log_error_message("You must write a course title! \n");
                         break;
@@ -100,8 +93,7 @@ public class SelectQueryResult {
 
                 case 3:
                     Console.WriteLine("Insert the name: ");
-                    str_search = Console.ReadLine();
-                    str_search = str_search.Trim();
+                    UniMain.check_input_string();
                     if (string.IsNullOrWhiteSpace(str_search)) {
                         UniMain.log_error_message("You must write a name! \n");
                         break;
@@ -127,8 +119,7 @@ public class SelectQueryResult {
 
                 case 4:
                     Console.WriteLine("Insert the surname: ");
-                    str_search = Console.ReadLine();
-                    str_search = str_search.Trim();
+                    UniMain.check_input_string();
                     if (string.IsNullOrWhiteSpace(str_search)) {
                         UniMain.log_error_message("You must write a surname! \n");
                         break;
@@ -154,14 +145,7 @@ public class SelectQueryResult {
 
                 case 5:
                     Console.WriteLine("Insert the academic year: ");
-                    try {
-                        num_search = (Convert.ToInt32(Console.ReadLine()));
-                    }
-                    catch (Exception ex) {
-                        UniMain.log_error_message("Input not taken! ");
-                        UniMain.log_exception(ex);
-                    }
-
+                    num_search = UniMain.check_input_int();
                     if (num_search <= 0 || num_search >= 4) {
                         UniMain.log_error_message("Invalid academic year! \n");
                         break;
@@ -187,14 +171,7 @@ public class SelectQueryResult {
 
                 case 6:
                     Console.WriteLine("Insert the birth year: ");
-                    try {
-                        num_search = (Convert.ToInt32(Console.ReadLine()));
-                    }
-                    catch (Exception ex) {
-                        UniMain.log_error_message("Input not taken! ");
-                        UniMain.log_exception(ex);
-                    }
-
+                    num_search = UniMain.check_input_int();
                     if (num_search <= 1899 || num_search >= 2006) {
                         UniMain.log_error_message("Invalid year! \n");
                         break;
@@ -276,13 +253,7 @@ public class SelectQueryResult {
             Console.ResetColor();
             Console.WriteLine();
 
-            try {
-                choice = (Convert.ToInt32(Console.ReadLine()));
-            }
-            catch (Exception ex) {
-                UniMain.log_error_message("Input not taken! ");
-                UniMain.log_exception(ex);
-            }
+            choice = UniMain.check_input_int();
             Console.WriteLine();
 
             switch (choice) {
@@ -306,8 +277,7 @@ public class SelectQueryResult {
 
                 case 2:
                     Console.WriteLine("Insert the course title: ");
-                    str_search = Console.ReadLine();
-                    str_search = str_search.Trim();
+                    str_search = UniMain.check_input_string();
                     if (string.IsNullOrWhiteSpace(str_search)) {
                         UniMain.log_error_message("You must write a course title! \n");
                         break;
@@ -339,8 +309,7 @@ public class SelectQueryResult {
 
                 case 3:
                     Console.WriteLine("Insert the name: ");
-                    str_search = Console.ReadLine();
-                    str_search = str_search.Trim();
+                    str_search = UniMain.check_input_string();
                     if (string.IsNullOrWhiteSpace(str_search)) {
                         UniMain.log_error_message("You must write a name! \n");
                         break;
@@ -365,8 +334,7 @@ public class SelectQueryResult {
 
                 case 4:
                     Console.WriteLine("Insert the surname: ");
-                    str_search = Console.ReadLine();
-                    str_search = str_search.Trim();
+                    str_search = UniMain.check_input_string();
                     if (string.IsNullOrWhiteSpace(str_search)) {
                         UniMain.log_error_message("You must write a surname! \n");
                         break;
@@ -391,14 +359,7 @@ public class SelectQueryResult {
 
                 case 5:
                     Console.WriteLine("Insert the academic year: ");
-                    try {
-                        num_search = (Convert.ToInt32(Console.ReadLine()));
-                    }
-                    catch (Exception ex) {
-                        UniMain.log_error_message("Input not taken! ");
-                        UniMain.log_exception(ex);
-                    }
-
+                    num_search = UniMain.check_input_int();
                     if (num_search <= 0 || num_search >= 4) {
                         UniMain.log_error_message("Invalid academic year! \n");
                         break;
@@ -480,13 +441,7 @@ public class SelectQueryResult {
             Console.ResetColor();
             Console.WriteLine();
 
-            try {
-                choice = (Convert.ToInt32(Console.ReadLine()));
-            }
-            catch (Exception ex) {
-                UniMain.log_error_message("Input not taken! ");
-                UniMain.log_exception(ex);
-            }
+            choice = UniMain.check_input_int();
             Console.WriteLine();
 
             switch (choice) {
@@ -510,8 +465,7 @@ public class SelectQueryResult {
 
                 case 2:
                     Console.WriteLine("Insert the title: ");
-                    str_search = Console.ReadLine();
-                    str_search = str_search.Trim();
+                    str_search = UniMain.check_input_string();
                     if (string.IsNullOrWhiteSpace(str_search)) {
                         UniMain.log_error_message("You must write a title! \n");
                         break;
@@ -536,14 +490,7 @@ public class SelectQueryResult {
 
                 case 3:
                     Console.WriteLine("Insert the academic year: ");
-                    try {
-                        num_search = (Convert.ToInt32(Console.ReadLine()));
-                    }
-                    catch (Exception ex) {
-                        UniMain.log_error_message("Input not taken! ");
-                        UniMain.log_exception(ex);
-                    }
-
+                    num_search = UniMain.check_input_int();
                     if (num_search <= 0 || num_search >= 4) {
                         UniMain.log_error_message("Invalid academic year! \n");
                         break;

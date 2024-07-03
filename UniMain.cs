@@ -57,21 +57,17 @@ public class UniMain {
             Console.WriteLine("1. Show students operations ");
             Console.WriteLine("2. Show professors operations ");
             Console.WriteLine("3. Show courses operations ");
-            Console.WriteLine("4. Modify student table ");
+            Console.WriteLine("4. Modify students table ");
+            Console.WriteLine("5. Modify professors table ");
+            Console.WriteLine("6. Modify courses table ");
             Console.ForegroundColor = ConsoleColor.Blue;
-            Console.WriteLine("5. Clear screen ");
+            Console.WriteLine("7. Clear screen ");
             Console.ForegroundColor = ConsoleColor.DarkRed;
-            Console.WriteLine("6. Exit application ");
+            Console.WriteLine("8. Exit application ");
             Console.ResetColor();
             Console.WriteLine();
-            
-            try {
-                choice = (Convert.ToInt32(Console.ReadLine()));
-            }
-            catch (Exception ex) {
-                log_error_message("Input not taken! ");
-                log_exception(ex);
-            }
+
+            choice = check_input_int();
             Console.WriteLine();
 
             switch (choice) {
@@ -93,14 +89,42 @@ public class UniMain {
                     Console.WriteLine();
                     break;
                 case 5:
-                    Console.Clear();
+                    InsertQueryResult.menu_modify_professor(str_connection);
+                    Console.WriteLine();
                     break;
                 case 6:
+                    InsertQueryResult.menu_modify_course(str_connection);
+                    Console.WriteLine();
+                    break;
+                case 7:
+                    Console.Clear();
+                    break;
+                case 8:
                     break;
             }
 
-        } while (choice != 6);
+        } while (choice != 8);
     }
+
+    public static int check_input_int() {
+        int input = 0;
+        try {
+            input = (Convert.ToInt32(Console.ReadLine()));
+        }
+        catch (Exception ex) {
+            log_error_message("Input not taken! ");
+            log_exception(ex);
+        }
+        return input;
+    }
+
+    public static string check_input_string() {
+        string input = "";
+        input = Console.ReadLine();
+        input = input.Trim();
+        return input;
+    }
+
 
 
     public static void log_exception(Exception ex) {
