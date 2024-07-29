@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using BetterConsoleTables;
+using MySql.Data.MySqlClient;
 
 namespace UniversityManagementSystem;
 
@@ -7,6 +8,7 @@ public class UniMain {
 
     public static void Main(string[] args) {
 
+        /*
         string server = "127.0.0.1";
         string database = "university";
         string username = "root";
@@ -24,6 +26,12 @@ public class UniMain {
                                 $"uid={username};" +
                                 $"pwd={password};" +
                                 $"database={database};";
+        */
+
+        string str_connection = connection_menu();
+        if (str_connection == "INVALID DETAILS") {
+            return;
+        }
 
         log_message("Connecting to the server... \n");
 
@@ -46,6 +54,52 @@ public class UniMain {
                             "Closing application... "});
     }
 
+
+    static string connection_menu() {
+
+        string server;
+        string database;
+        string username, password;
+        
+        Console.WriteLine("Insert the server's IP: ");
+        server = Console.ReadLine();
+        Console.WriteLine();
+
+        Console.WriteLine("Insert the database name: ");
+        database = Console.ReadLine();
+        Console.WriteLine();
+
+        Console.WriteLine("Insert the username: ");
+        username = Console.ReadLine();
+        Console.WriteLine();
+
+        Console.WriteLine("Insert the password: ");
+        password = Console.ReadLine();
+        Console.WriteLine();
+
+        Table table = new Table();
+        table.Config = TableConfiguration.Unicode();
+
+        table.AddColumn("Database connection");
+        table.AddRow("Server: " + server);
+        table.AddRow("Database: " + database);
+        table.AddRow("Username: " + username);
+        table.AddRow("Password: " + password);
+        Console.WriteLine(table.ToString());
+
+        if (string.IsNullOrWhiteSpace(server) || string.IsNullOrWhiteSpace(database)
+            || string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password)) {
+
+            log_error_message(new[] { "Server or Database details are incorrect!",
+                                      "Closing application... "});
+            return "INVALID DETAILS";
+        }
+
+        return $"server={server};" +
+               $"uid={username};" +
+               $"pwd={password};" +
+               $"database={database};";
+    }
 
     static void main_menu(string str_connection) {
 
