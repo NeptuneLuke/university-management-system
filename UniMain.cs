@@ -5,8 +5,7 @@ namespace UniversityManagementSystem;
 
 public class UniMain {
 
-
-    public static void Main(string[] args) {
+    private static void Main(string[] args) {
 
         /*
         string server = "127.0.0.1";
@@ -33,29 +32,28 @@ public class UniMain {
             return;
         }
 
-        log_message("Connecting to the server... \n");
+        Util.log_message("Connecting to the server... \n");
 
         try {
             MySqlConnection try_connection = new MySqlConnection(str_connection);
             try_connection.Open();
             if (try_connection.State == System.Data.ConnectionState.Open) {
-                log_message("Connection succesful! \n");
+                Util.log_message("Connection succesful! \n");
             }
             try_connection.Close();
         }
         catch (MySqlException ex) {
-            log_sql_exception(ex);
+            Util.log_sql_exception(ex);
         }
 
         main_menu(str_connection);
 
-        log_message(new string [] { "Closing connection to the server... ",
+        Util.log_message(new string [] { "Closing connection to the server... ",
                             "Connection closed!  ", 
                             "Closing application... "});
     }
 
-
-    static string connection_menu() {
+    private static string connection_menu() {
 
         string server;
         string database;
@@ -90,7 +88,7 @@ public class UniMain {
         if (string.IsNullOrWhiteSpace(server) || string.IsNullOrWhiteSpace(database)
             || string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password)) {
 
-            log_error_message(new[] { "Server or Database details are incorrect!",
+            Util.log_error_message(new[] { "Server or Database details are incorrect!",
                                       "Closing application... "});
             return "INVALID DETAILS";
         }
@@ -101,7 +99,7 @@ public class UniMain {
                $"database={database};";
     }
 
-    static void main_menu(string str_connection) {
+    private static void main_menu(string str_connection) {
 
         int choice = 0;
 
@@ -121,33 +119,33 @@ public class UniMain {
             Console.ResetColor();
             Console.WriteLine();
 
-            choice = check_input_int();
+            choice = Util.check_input_int();
             Console.WriteLine();
 
             switch (choice) {
 
                 case 1:
-                    SelectQueryResult.menu_show_student(str_connection);
+                    Student.menu_show_student(str_connection);
                     Console.WriteLine();
                     break;
                 case 2:
-                    SelectQueryResult.menu_show_professor(str_connection);
+                    Professor.menu_show_professor(str_connection);
                     Console.WriteLine();
                     break;
                 case 3:
-                    SelectQueryResult.menu_show_course(str_connection);
+                    Course.menu_show_course(str_connection);
                     Console.WriteLine();
                     break;
                 case 4:
-                    InsertQueryResult.menu_modify_student(str_connection);
+                    Student.menu_modify_student(str_connection);
                     Console.WriteLine();
                     break;
                 case 5:
-                    InsertQueryResult.menu_modify_professor(str_connection);
+                    Professor.menu_modify_professor(str_connection);
                     Console.WriteLine();
                     break;
                 case 6:
-                    InsertQueryResult.menu_modify_course(str_connection);
+                    Course.menu_modify_course(str_connection);
                     Console.WriteLine();
                     break;
                 case 7:
@@ -158,71 +156,5 @@ public class UniMain {
             }
 
         } while (choice != 8);
-    }
-
-    public static int check_input_int() {
-        int input = 0;
-        try {
-            input = (Convert.ToInt32(Console.ReadLine()));
-        }
-        catch (Exception ex) {
-            log_error_message("Input not taken! ");
-            log_exception(ex);
-        }
-        return input;
-    }
-
-    public static string check_input_string() {
-        string input = "";
-        input = Console.ReadLine();
-        input = input.Trim();
-        return input;
-    }
-
-
-
-    public static void log_exception(Exception ex) {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine($"[ERROR]: {ex.Message}");
-        Console.ResetColor();
-        Console.WriteLine();
-    }
-    
-    public static void log_sql_exception(MySqlException ex) {
-        Console.ForegroundColor = ConsoleColor.Red;
-        if (ex.Code != 0) {
-            Console.WriteLine("Unable to execute the command!");
-        }
-        Console.WriteLine($"[ERROR]: {ex.Code} - {ex.Message}");
-        Console.ResetColor();
-        Console.WriteLine();
-    }
-
-    public static void log_error_message(string message) {
-        Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine(message);
-        Console.ResetColor();
-    }
-
-    public static void log_error_message(string[] messages) {
-        Console.ForegroundColor = ConsoleColor.Red;
-        for (int i = 0; i < messages.Length; ++i) {
-            Console.WriteLine(messages[i]);
-        }
-        Console.ResetColor();
-    }
-
-    public static void log_message(string message) {
-        Console.ForegroundColor = ConsoleColor.Green;
-        Console.WriteLine(message);
-        Console.ResetColor();
-    }
-
-    public static void log_message(string[] messages) {
-        Console.ForegroundColor = ConsoleColor.Green;
-        for (int i = 0; i < messages.Length; ++i) {
-            Console.WriteLine(messages[i]);
-        }
-        Console.ResetColor();
     }
 }

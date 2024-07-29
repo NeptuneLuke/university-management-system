@@ -3,13 +3,23 @@ The main entry point of the application.
 
 <br>
 
-## SelectQueryResult.cs
-Class with all SELECT queries.
+## Util.cs
+Class with SQL queries, message logging, exception handling, input checking.
 
 <br>
 
-## InsertQueryResult.cs
-Class with all INSERT and UPDATE queries.
+## Student.cs
+Class with Student menu/print functions.
+
+<br>
+
+## Professor.cs
+Class with Professor menu/print functions.
+
+<br>
+
+## Course.cs
+Class with Course menu/print functions.
 
 
 <br>
