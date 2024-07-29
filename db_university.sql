@@ -4,7 +4,8 @@ USE university;
 CREATE TABLE professor (
 	professor_id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL
+    last_name VARCHAR(50) NOT NULL,
+	email VARCHAR(150) NOT NULL UNIQUE
 );
 -- -----------------------------------------------
 CREATE TABLE course (
